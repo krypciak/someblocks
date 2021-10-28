@@ -38,7 +38,7 @@ blocks.h
 *.i*86
 *.x86_64
 *.hex
-dwmblocks
+someblocks
 
 # Debug files
 *.dSYM/

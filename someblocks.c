@@ -2,10 +2,9 @@
 #include<stdio.h>
 #include<string.h>
 #include<unistd.h>
+#include<fcntl.h>
+#include<errno.h>
 #include<signal.h>
-#ifndef NO_X
-#include<X11/Xlib.h>
-#endif
 #ifdef __OpenBSD__
 #define SIGPLUS			SIGUSR1+1
 #define SIGMINUS		SIGUSR1-1
@@ -36,17 +35,8 @@ int getstatus(char *str, char *last);
 void statusloop();
 void termhandler();
 void pstdout();
-#ifndef NO_X
-void setroot();
-static void (*writestatus) () = setroot;
-static int setupX();
-static Display *dpy;
-static int screen;
-static Window root;
-#else
-static void (*writestatus) () = pstdout;
-#endif
-
+void psomebar();
+static void (*writestatus) () = psomebar;
 
 #include "blocks.h"
 
@@ -54,6 +44,8 @@ static char statusbar[LENGTH(blocks)][CMDLENGTH] = {0};
 static char statusstr[2][STATUSLENGTH];
 static int statusContinue = 1;
 static int returnStatus = 0;
+static char somebarPath[128];
+static int somebarFd = -1;
 
 //opens process *cmd and stores output in *output
 void getcmd(const Block *block, char *output)
@@ -125,34 +117,34 @@ int getstatus(char *str, char *last)
 	return strcmp(str, last);//0 if they are the same
 }
 
-#ifndef NO_X
-void setroot()
-{
-	if (!getstatus(statusstr[0], statusstr[1]))//Only set root if text has changed.
-		return;
-	XStoreName(dpy, root, statusstr[0]);
-	XFlush(dpy);
-}
-
-int setupX()
-{
-	dpy = XOpenDisplay(NULL);
-	if (!dpy) {
-		fprintf(stderr, "dwmblocks: Failed to open display\n");
-		return 0;
-	}
-	screen = DefaultScreen(dpy);
-	root = RootWindow(dpy, screen);
-	return 1;
-}
-#endif
-
 void pstdout()
 {
 	if (!getstatus(statusstr[0], statusstr[1]))//Only write out if text has changed.
 		return;
 	printf("%s\n",statusstr[0]);
 	fflush(stdout);
+}
+
+
+void psomebar()
+{
+	if (!getstatus(statusstr[0], statusstr[1]))//Only write out if text has changed.
+		return;
+    if (somebarFd < 0) {
+        somebarFd = open(somebarPath, O_WRONLY|O_CLOEXEC);
+        if (somebarFd < 0 && errno == ENOENT) {
+            // assume somebar is not ready yet
+            sleep(1);
+            somebarFd = open(somebarPath, O_WRONLY|O_CLOEXEC);
+        }
+        if (somebarFd < 0) {
+            perror("open");
+            return;
+        }
+    }
+    write(somebarFd, "status ", 7);
+    write(somebarFd, statusstr[0], strlen(statusstr[0]));
+    write(somebarFd, "\n", 1);
 }
 
 
@@ -189,6 +181,12 @@ void termhandler()
 	statusContinue = 0;
 }
 
+void sigpipehandler()
+{
+    close(somebarFd);
+    somebarFd = -1;
+}
+
 int main(int argc, char** argv)
 {
 	for (int i = 0; i < argc; i++) {//Handle command line arguments
@@ -197,17 +195,13 @@ int main(int argc, char** argv)
 		else if (!strcmp("-p",argv[i]))
 			writestatus = pstdout;
 	}
-#ifndef NO_X
-	if (!setupX())
-		return 1;
-#endif
+    strcpy(somebarPath, getenv("XDG_RUNTIME_DIR"));
+    strcat(somebarPath, "/somebar-0");
 	delimLen = MIN(delimLen, strlen(delim));
 	delim[delimLen++] = '\0';
 	signal(SIGTERM, termhandler);
 	signal(SIGINT, termhandler);
+	signal(SIGPIPE, sigpipehandler);
 	statusloop();
-#ifndef NO_X
-	XCloseDisplay(dpy);
-#endif
 	return 0;
 }

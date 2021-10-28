@@ -1,8 +1,11 @@
 # someblocks
-Modular status bar for [somebar](https://gitlab.com/raphaelr/somebar) written in c.
+Modular status bar for [somebar](https://git.sr.ht/~raphi/somebar) written in c.
 
 This is a fork of [dwmblocks](https://github.com/torrinfail/dwmblocks), modified
 to connect to somebar instead of dwm.
+
+The mailing list for this project is
+[~raphi/somedesktop@lists.sr.ht](mailto:~raphi/somedesktop@lists.sr.ht).
 # usage
 To use someblocks first run 'make' and then install it with 'sudo make install'.
 After that you can put someblocks in your startup script to have it start with dwl/somebar.

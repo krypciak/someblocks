@@ -130,21 +130,21 @@ void psomebar()
 {
 	if (!getstatus(statusstr[0], statusstr[1]))//Only write out if text has changed.
 		return;
-    if (somebarFd < 0) {
-        somebarFd = open(somebarPath, O_WRONLY|O_CLOEXEC);
-        if (somebarFd < 0 && errno == ENOENT) {
-            // assume somebar is not ready yet
-            sleep(1);
-            somebarFd = open(somebarPath, O_WRONLY|O_CLOEXEC);
-        }
-        if (somebarFd < 0) {
-            perror("open");
-            return;
-        }
-    }
-    write(somebarFd, "status ", 7);
-    write(somebarFd, statusstr[0], strlen(statusstr[0]));
-    write(somebarFd, "\n", 1);
+	if (somebarFd < 0) {
+		somebarFd = open(somebarPath, O_WRONLY|O_CLOEXEC);
+		if (somebarFd < 0 && errno == ENOENT) {
+			// assume somebar is not ready yet
+			sleep(1);
+			somebarFd = open(somebarPath, O_WRONLY|O_CLOEXEC);
+		}
+		if (somebarFd < 0) {
+			perror("open");
+			return;
+		}
+	}
+	write(somebarFd, "status ", 7);
+	write(somebarFd, statusstr[0], strlen(statusstr[0]));
+	write(somebarFd, "\n", 1);
 }
 
 
@@ -183,8 +183,8 @@ void termhandler()
 
 void sigpipehandler()
 {
-    close(somebarFd);
-    somebarFd = -1;
+	close(somebarFd);
+	somebarFd = -1;
 }
 
 int main(int argc, char** argv)
@@ -195,8 +195,8 @@ int main(int argc, char** argv)
 		else if (!strcmp("-p",argv[i]))
 			writestatus = pstdout;
 	}
-    strcpy(somebarPath, getenv("XDG_RUNTIME_DIR"));
-    strcat(somebarPath, "/somebar-0");
+	strcpy(somebarPath, getenv("XDG_RUNTIME_DIR"));
+	strcat(somebarPath, "/somebar-0");
 	delimLen = MIN(delimLen, strlen(delim));
 	delim[delimLen++] = '\0';
 	signal(SIGTERM, termhandler);

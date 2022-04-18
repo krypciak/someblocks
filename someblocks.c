@@ -1,3 +1,4 @@
+#define _POSIX_C_SOURCE 200809L
 #include<stdlib.h>
 #include<stdio.h>
 #include<string.h>
@@ -142,9 +143,7 @@ void psomebar()
 			return;
 		}
 	}
-	write(somebarFd, "status ", 7);
-	write(somebarFd, statusstr[0], strlen(statusstr[0]));
-	write(somebarFd, "\n", 1);
+	dprintf(somebarFd, "status %s\n", statusstr[0]);
 }
 
 

@@ -193,9 +193,15 @@ int main(int argc, char** argv)
 			strncpy(delim, argv[++i], delimLen);
 		else if (!strcmp("-p",argv[i]))
 			writestatus = pstdout;
+		else if (!strcmp("-s",argv[i]))
+			strcpy(somebarPath, argv[++i]);
 	}
-	strcpy(somebarPath, getenv("XDG_RUNTIME_DIR"));
-	strcat(somebarPath, "/somebar-0");
+
+	if (!strlen(somebarPath)) {
+		strcpy(somebarPath, getenv("XDG_RUNTIME_DIR"));
+		strcat(somebarPath, "/somebar-0");
+	}
+
 	delimLen = MIN(delimLen, strlen(delim));
 	delim[delimLen++] = '\0';
 	signal(SIGTERM, termhandler);

@@ -1,4 +1,6 @@
-# This is a personal fork of [~raphi/someblocks](https://git.sr.ht/~raphi/someblocks)
+# This is a fork of [~raphi/someblocks](https://git.sr.ht/~raphi/someblocks)  
+Things I changed:
+1. Blocks are executed asynchronously
 Original README.md:  
 
 # someblocks

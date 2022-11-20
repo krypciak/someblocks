@@ -1,9 +1,9 @@
 //Modify this file to change what commands output to your statusbar, and recompile using the make command.
 static const Block blocks[] = {
 	/*Icon*/	/*Command*/		/*Update Interval*/	/*Update Signal*/
-	{"", "free -h | awk '/^Mem/ { print $3\"/\"$2 }' | sed s/i//g",	30,		0},
+	{"", "free -h | awk '/^Mem/ { print $3\"/\"$2 }' | sed s/i//g",	2,		0},
     
-    {"", "printf \"%.0f%%\" \"$(awk '{u=$2+$4; t=$2+$4+$5; if (NR==1){u1=u; t1=t;} else print ($2+$4-u1) * 100 / (t-t1); }' <(grep 'cpu ' /proc/stat) <(sleep 1;grep 'cpu ' /proc/stat))\"",   5, 0},
+    {"", "printf \"%.0f%%\" \"$(awk '{u=$2+$4; t=$2+$4+$5; if (NR==1){u1=u; t1=t;} else print ($2+$4-u1) * 100 / (t-t1); }' <(grep 'cpu ' /proc/stat) <(sleep 1;grep 'cpu ' /proc/stat))\"",  2, 0},
 
     {" ", "echo \"scale = 1; $(cat /sys/class/hwmon/hwmon0/temp1_input) / 1000\" | bc | tr -d '\n'; printf '°C'",    5,      0},
 

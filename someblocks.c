@@ -56,7 +56,7 @@ static int statusContinue = 1;
 static int returnStatus = 0;
 static char somebarPath[128];
 static int somebarFd = -1;
-// async
+// block threads
 static pthread_t threads[LENGTH(blocks)];
 static pthread_mutex_t lock;
 
@@ -103,10 +103,13 @@ void startthreads(void)
 	for (unsigned int i = 0; i < LENGTH(blocks); i++) {
 		current = blocks + i;
         data[i] = (ThreadData){.block = current, .i = i};
+        // start thread
         pthread_create(&threads[i], NULL, threadblock, (void *)&data[i]);
     }
 }
 
+
+// sleep tms miliseconds
 int msleep(long tms)
 {
     struct timespec ts;
@@ -136,6 +139,8 @@ void *threadblock(void *data)
         getcmd(block, statusbar[data1->i]);
         writestatus();
 
+        // sleep block->interval in sections of 0.5s
+        // in case someblocks gets killed
         unsigned int sleep = block->interval * 1000;
         for(int i = 0; i < block->interval * 2; i++) {
             if(statusContinue == 0) break;
@@ -215,10 +220,6 @@ void statusloop()
     
     startthreads();  
 
-    //while(1) {
-    //    writestatus();
-    //    sleep(1);
-    //}
     for(int i = 0; i < LENGTH(blocks); i++) {
         pthread_join(threads[i], NULL);
     }

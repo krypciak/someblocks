@@ -1,4 +1,5 @@
-# This is a personal fork of [~raphi/somebar](https://git.sr.ht/~raphi/somebar)
+# This is a personal fork of [~raphi/someblocks](https://git.sr.ht/~raphi/someblocks)
+Original README.md:  
 
 # someblocks
 Modular status bar for [somebar](https://git.sr.ht/~raphi/somebar) written in c.

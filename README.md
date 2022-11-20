@@ -1,8 +1,8 @@
 # This is a fork of [~raphi/someblocks](https://git.sr.ht/~raphi/someblocks)  
 Things I changed:
 1. Blocks are executed asynchronously  
-Original README.md:  
 
+Original README.md:  
 # someblocks
 Modular status bar for [somebar](https://git.sr.ht/~raphi/somebar) written in c.
 

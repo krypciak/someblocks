@@ -12,7 +12,7 @@ static const Block blocks[] = {
     {"", "$HOME/.config/dotfiles/scripts/network-traffic.sh download",  1,      0},
     {"", "$HOME/.config/dotfiles/scripts/network-traffic.sh upload",    1,      0},
 
-    {"﬌", "cat /tmp/update", 1200, 0},
+    {"﬌", "cat $HOME/.cache/update", 1200, 0},
 
     {"", "uptime --pretty | sed -E -e \'s/ (minutes|minute)/m/g\' -e \'s/ (hours|hour)/h/g\' -e \'s/ (day|days)/d/g\'", 60, 0},
 

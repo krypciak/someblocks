@@ -95,15 +95,18 @@ void getsigcmds(unsigned int signal)
 
 void setupsignals()
 {
+	struct sigaction sa = {0};
 #ifndef __OpenBSD__
-	    /* initialize all real time signals with dummy handler */
-    for (int i = SIGRTMIN; i <= SIGRTMAX; i++)
-        signal(i, dummysighandler);
+	/* initialize all real time signals with dummy handler */
+	sa.sa_handler = dummysighandler;
+	for (int i = SIGRTMIN; i <= SIGRTMAX; i++)
+		sigaction(i, &sa, NULL);
 #endif
 
+	sa.sa_handler = sighandler;
 	for (unsigned int i = 0; i < LENGTH(blocks); i++) {
 		if (blocks[i].signal > 0)
-			signal(SIGMINUS+blocks[i].signal, sighandler);
+			sigaction(SIGMINUS+blocks[i].signal, &sa, NULL);
 	}
 
 }

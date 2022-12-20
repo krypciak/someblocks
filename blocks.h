@@ -14,7 +14,7 @@ static const Block blocks[] = {
 
     {"﬌", "cat $HOME/.cache/update", 1200, 0},
 
-    {"", "uptime --pretty | sed -E -e \'s/ (minutes|minute)/m/g\' -e \'s/ (hours|hour)/h/g\' -e \'s/ (day|days)/d/g\'", 60, 0},
+    {" ", "uptime --pretty | tail -c +4 | sed -E -e \'s/ (minutes|minute)/m/g\' -e \'s/ (hours|hour)/h/g\' -e \'s/ (day|days)/d/g\'", 60, 0},
 
 	{"", "date +'%m %b  %d %a  %R:%S '",		1,		0},
 };

@@ -16,6 +16,8 @@ static const Block blocks[] = {
 
     {" ", "uptime --pretty | tail -c +4 | sed -E -e \'s/ (minutes|minute)/m/g\' -e \'s/ (hours|hour)/h/g\' -e \'s/ (day|days)/d/g\'", 60, 0},
 
+    {" ", "cat /tmp/keyboard_layout",                                  1,      0},
+
 	{"", "date +'%m %b  %d %a  %R:%S '",		1,		0},
 };
 

@@ -85,13 +85,17 @@ void getcmd(const Block *block, char *output)
 	else
 		output1[i++] = '\0';
 
-    // lock 
-    pthread_mutex_lock(&lock);
-    strcpy(output, output1);
-    // unlock
-    pthread_mutex_unlock(&lock);
+
 
 	pclose(cmdf);
+
+    // lock
+    pthread_mutex_lock(&lock);
+
+    strcpy(output, output1);
+
+    // unlock
+    pthread_mutex_unlock(&lock);
 
     free(output1);
 }
@@ -137,7 +141,14 @@ void *threadblock(void *data)
     const Block *block = data1->block;
     while(1) {
         getcmd(block, statusbar[data1->i]);
+
+        // lock
+        pthread_mutex_lock(&lock);
+
         writestatus();
+
+        // unlock
+        pthread_mutex_unlock(&lock);
 
         // sleep block->interval in sections of 0.5s
         // in case someblocks gets killed
@@ -179,8 +190,10 @@ int getstatus(char *str, char *last)
 {
 	strcpy(last, str);
 	str[0] = '\0';
+
 	for (unsigned int i = 0; i < LENGTH(blocks); i++)
 		strcat(str, statusbar[i]);
+
 	str[strlen(str)-strlen(delim)] = '\0';
 	return strcmp(str, last);//0 if they are the same
 }
@@ -190,6 +203,7 @@ void pstdout()
 	if (!getstatus(statusstr[0], statusstr[1]))//Only write out if text has changed.
 		return;
 	printf("%s\n",statusstr[0]);
+
 	fflush(stdout);
 }
 
@@ -198,6 +212,7 @@ void psomebar()
 {
 	if (!getstatus(statusstr[0], statusstr[1]))//Only write out if text has changed.
 		return;
+
 	if (somebarFd < 0) {
 		somebarFd = open(somebarPath, O_WRONLY|O_CLOEXEC);
 		if (somebarFd < 0 && errno == ENOENT) {
@@ -209,7 +224,10 @@ void psomebar()
 			perror("open");
 			return;
 		}
+
 	}
+    
+
 	dprintf(somebarFd, "status %s\n", statusstr[0]);
 }
 

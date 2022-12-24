@@ -5,7 +5,7 @@ static const Block blocks[] = {
     
     {"", "printf \"%.0f%%\" \"$(awk '{u=$2+$4; t=$2+$4+$5; if (NR==1){u1=u; t1=t;} else print ($2+$4-u1) * 100 / (t-t1); }' <(grep 'cpu ' /proc/stat) <(sleep 1;grep 'cpu ' /proc/stat))\"",  2, 0},
 
-    {" ", "echo \"scale = 1; $(cat /sys/class/hwmon/hwmon0/temp1_input) / 1000\" | bc | tr -d '\n'; printf '°C'",    5,      0},
+    {" ", "echo \"scale = 1; $(cat /sys/class/hwmon/hwmon0/temp1_input) / 1000\" | bc | tr -d '\n'; printf '°C'",    1,      0},
 
     {" ", "gammastep -p 2> >(grep 'temperature') | awk '{printf $4}'",  15,     0},
 

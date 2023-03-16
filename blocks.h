@@ -9,8 +9,7 @@ static const Block blocks[] = {
 
     {" ", "$HOME/.config/dotfiles/scripts/bar/screentemp_gammastep.sh",  15,     0},
 
-    {"", "$HOME/.config/dotfiles/scripts/bar/network-traffic.sh download",  1,      0},
-    {"", "$HOME/.config/dotfiles/scripts/bar/network-traffic.sh upload",    1,      0},
+    {"", "$HOME/.config/dotfiles/scripts/bar/network-traffic.sh",  5,      0},
 
     {"﬌", "cat $HOME/.cache/update", 60, 0},
 

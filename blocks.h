@@ -5,7 +5,7 @@ static const Block blocks[] = {
     
     {"", "$HOME/.config/dotfiles/scripts/bar/cpu.sh",  2, 0},
 
-    {" ", "$HOME/.config/dotfiles/scripts/bar/cputemp.sh",    1,      0},
+    {" ", "$HOME/.config/dotfiles/scripts/bar/cputemp.sh",    2,      0},
 
     {" ", "$HOME/.config/dotfiles/scripts/bar/screentemp_gammastep.sh",  15,     0},
 
@@ -17,7 +17,7 @@ static const Block blocks[] = {
 
     {" ", "cat /tmp/keyboard_layout",                                  1,      0},
 
-	{"", "$HOME/.config/dotfiles/scripts/bar/date.sh",		1,		0},
+	{"", "$HOME/.config/dotfiles/scripts/bar/date.sh",		10,		0},
 };
 
 //sets delimeter between status commands. NULL character ('\0') means no delimeter.

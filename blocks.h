@@ -1,8 +1,10 @@
 //Modify this file to change what commands output to your statusbar, and recompile using the make command.
 static const Block blocks[] = {
 	/*Icon*/	/*Command*/		/*Update Interval*/	/*Update Signal*/
-	{"", "$HOME/.config/dotfiles/scripts/bar/mem.sh",	2,		0},
-    
+	{"󰍛", "$HOME/.config/dotfiles/scripts/bar/mem.sh",	2,		0},
+
+	{"󰓡", "$HOME/.config/dotfiles/scripts/bar/swap.sh",	2,		0},
+
     {"", "$HOME/.config/dotfiles/scripts/bar/cpu.sh",  2, 0},
 
     {" ", "$HOME/.config/dotfiles/scripts/bar/cputemp.sh",    2,      0},
@@ -11,7 +13,7 @@ static const Block blocks[] = {
 
     {"", "$HOME/.config/dotfiles/scripts/bar/network-traffic.sh",  5,      0},
 
-    {"﬌", "cat $HOME/.cache/update", 60, 0},
+    {"󰘍", "cat $HOME/.cache/update", 60, 0},
 
     {" ", "$HOME/.config/dotfiles/scripts/bar/uptime.sh", 60, 0},
 

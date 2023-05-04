@@ -3,11 +3,11 @@ static const Block blocks[] = {
 	/*Icon*/	/*Command*/		/*Update Interval*/	/*Update Signal*/
 	{"󰍛", "$HOME/.config/dotfiles/scripts/bar/mem.sh",	2,		0},
 
-	{"󰓡", "$HOME/.config/dotfiles/scripts/bar/swap.sh",	2,		0},
+	{"", "$HOME/.config/dotfiles/scripts/bar/swap.sh",	2,		0},
 
     {"", "$HOME/.config/dotfiles/scripts/bar/cpu.sh",  2, 0},
 
-    {" ", "$HOME/.config/dotfiles/scripts/bar/cputemp.sh",    2,      0},
+    {" ", "$HOME/.config/dotfiles/scripts/bar/cputemp.sh",    2,      0},
 
     {" ", "$HOME/.config/dotfiles/scripts/bar/screentemp_gammastep.sh",  15,     0},
 

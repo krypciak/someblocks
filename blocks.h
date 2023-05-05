@@ -7,13 +7,13 @@ static const Block blocks[] = {
 
     {"", "$HOME/.config/dotfiles/scripts/bar/cpu.sh",  2, 0},
 
-    {" ", "$HOME/.config/dotfiles/scripts/bar/cputemp.sh",    2,      0},
+    {"", "$HOME/.config/dotfiles/scripts/bar/cputemp.sh",    2,      0},
 
-    {" ", "$HOME/.config/dotfiles/scripts/bar/screentemp_gammastep.sh",  15,     0},
+    {"", "$HOME/.config/dotfiles/scripts/bar/screentemp-gammastep.sh",  15,     0},
 
     {"", "$HOME/.config/dotfiles/scripts/bar/network-traffic.sh",  5,      0},
 
-    {"󰘍", "cat $HOME/.cache/update", 60, 0},
+    {"", "$HOME/.config/dotfiles/scripts/bar/updates.sh", 60, 0},
 
     {" ", "$HOME/.config/dotfiles/scripts/bar/uptime.sh", 60, 0},
 

@@ -55,7 +55,7 @@ static char statusstr[2][STATUSLENGTH];
 static int statusContinue = 1;
 static int returnStatus = 0;
 static char somebarPath[128];
-static int somebarFd = -1;
+static int somebarFd = 1;
 // block threads
 static pthread_t threads[LENGTH(blocks)];
 static pthread_mutex_t lock;
@@ -271,12 +271,14 @@ void sigpipehandler()
 int main(int argc, char** argv)
 {
 	for (int i = 0; i < argc; i++) {//Handle command line arguments
-		if (!strcmp("-d",argv[i]))
+        if (!strcmp("-d",argv[i]))
 			strncpy(delim, argv[++i], delimLen);
-		else if (!strcmp("-p",argv[i]))
-			writestatus = pstdout;
-		else if (!strcmp("-s",argv[i]))
-			strcpy(somebarPath, argv[++i]);
+        else if (!strcmp("-p",argv[i]))
+		    writestatus = pstdout; 
+        else if (!strcmp("-s",argv[i]))
+		    strcpy(somebarPath, argv[++i]);
+        else if (!strcmp("-m",argv[i]))
+            somebarFd = atoi(argv[++i]);
 	}
 
 	if (!strlen(somebarPath)) {

@@ -8,7 +8,7 @@ Launching with dwl: `someblocks -m -1`
 <br>
 
 Launching with river: `someblocks -m 1 | awk "{print \"all \" \$0; fflush();}" | sandbar`
-<br> 
+<br><br><br>
 
 Original README.md:  
 # someblocks

@@ -1,6 +1,14 @@
 # This is a fork of [~raphi/someblocks](https://git.sr.ht/~raphi/someblocks)  
 Things I changed:
-1. Blocks are executed asynchronously  
+1. Blocks are executed asynchronously
+2. Add compatibility with sandbar
+<br>
+
+Launching with dwl: `someblocks -m -1`
+<br>
+
+Launching with river: `someblocks -m 1 | awk "{print \"all \" \$0; fflush();}" | sandbar`
+<br> 
 
 Original README.md:  
 # someblocks

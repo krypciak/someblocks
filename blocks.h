@@ -5,7 +5,7 @@ static const Block blocks[] = {
 
 	{"", "$HOME/.config/scripts/bar/swap.sh",	2,		0},
 
-    {"", "$HOME/.config/scripts/bar/cpu.sh",  2, 0},
+    {"  ", "$HOME/.config/scripts/bar/cpu.sh",  2, 0},
 
     {"", "$HOME/.config/scripts/bar/cputemp.sh",    2,      0},
 

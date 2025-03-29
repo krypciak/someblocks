@@ -17,8 +17,6 @@ static const Block blocks[] = {
 
     {" ", "$HOME/.config/scripts/bar/uptime.sh", 60, 0},
 
-    {" ", "cat /tmp/keyboard_layout",                                  1,      0},
-
 	{"", "$HOME/.config/scripts/bar/date.sh",		10,		0},
 };
 
